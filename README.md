@@ -1,4 +1,38 @@
 # 김영민 201840113
+## [ 10월 27일 ]
+### react-router-dom 
+    - 메뉴를 클릭했을때 이동하는 기능을 구현하는데 사용
+    - 설치
+    ```
+    npm install react-router-dom
+    ```
+
+### Router
+    - 라우터는 접속한곳의 요소를 순서대로 path props가 있는지 물어보고 있으면 출력한다
+    ```
+    // { <Route path='/home'>
+    // <h1>Home</h1>           =>  localhost:3000/#/home
+    // </Route>
+    ...
+    ```
+
+### /home/instroduction 접속시 home이 동시출력되는 문제 해결
+    - path props를 모두가 갖고있기때문에 모두같이 출력되는 문제
+    - Route 컴포넌트에 exact props 추가
+    - exact props는 Rout 컴포넌트가 path props와 정확하게 일치하는 url에만 
+    반응하게 만듬
+
+### navigation 만들기
+    - Navigation.js 생성
+    - Home과 About이라는 2개의 버튼을 만들고 화면이 보이게 만듬
+    ```
+    <a href='/'>Home</a>
+    <a href='/about'>About</a>
+    ```
+
+---
+
+
 ## [ 10월 13일 ]
 ## 전체적인 스타일적용
 - 이미지 불러오기
@@ -25,6 +59,8 @@
     ```
     <h5 className="movie__year">{year}</h5>
     ```
+
+---
 
 ## [ 10월 6일 ]
 ## axios 설치 및 사용
