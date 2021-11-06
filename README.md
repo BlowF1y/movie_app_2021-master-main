@@ -1,4 +1,34 @@
 # 김영민 201840113
+## [ 11월 2일 ]
+## Package.json 과 package-lock.json 의 차이
+- Package.json
+    - 패키지 의존성 파일
+    - 협업할때 각자의 컴퓨터의 동일한 개발환경을 구축할때 사용
+    - 개인이 프로젝트를 재생성 하겅나 오루가 있을때도 사용
+- Package.json
+    - package.json 이 변경될 때 마다 업데이트 되는 것으로 좀더 정확한 버전이
+기록되어 있다.
+  
+## 컴포넌트의 설치오류
+```
+npm WARN read-shrinkwrap This version of npm is compatible with lockfileVersion@1, but
+package-lock.json was generated for lockfileVersion@2. I'll try to do my best with it!
+
+npm ERR! Maximum call stack size exceeded
+
+npm ERR! A complete log of this run can be found in:
+
+npm ERR! C:\Users\82102\AppData\Roaming\npm-cache\_logs\2021-10-
+27T07_07_17_243Z-debug.log
+```
+## 컴포넌트 설치 오류등 원인 규먕이 되지않은 오류가 있을때 해결법
+```
+$ npm cache clean --force
+$ npm rebuild
+$ rm -rf node_modules
+$ npm install
+```    
+------------------------
 ## [ 10월 27일 ]
 ### react-router-dom 
 - 메뉴를 클릭했을때 이동하는 기능을 구현하는데 사용
