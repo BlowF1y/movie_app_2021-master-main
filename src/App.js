@@ -8,7 +8,8 @@ function App(){
     <HashRouter>
         <Navigation />
         <Route PATH='./' exact={true} component={Home}/>
-        <Route PATH='./about' component={About}/>
+        <Route PATH='./about' component={About}/>npm 
+        {/* <Route path='/movie-detail' component={detail}/> */}
     </HashRouter>
     )
     
