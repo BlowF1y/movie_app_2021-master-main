@@ -1,5 +1,27 @@
 # 김영민 201840113
-## [ 11월 2일 ]
+## [ 11월 10일 ]
+## 리액트 시작하기
+## 1. https://ko.reactjs.org/
+공부좀해라~~~!!!!!!!
+---
+## 영화 제목 출력
+- detail.js에 추가
+    ```
+    render(){
+        const { location } = this.props
+        if(location.state){
+            return (
+                <span>{ location.state.title }</span>
+            )
+        } else {
+            return null
+        }
+    }
+    ```
+- router 사용 후 주소에 hash(#)가 나타나는 현상 제거법
+    - HashRouter 대신 BrowserRouter 사용하기.
+---
+## [ 11월 03일 ]
 ## Package.json 과 package-lock.json 의 차이
 - Package.json
     - 패키지 의존성 파일
