@@ -1,4 +1,147 @@
 # 김영민 201840113
+## [ 11월 16일 ]
+## 1. https://ko.reactjs.org/
+### 1. 간단한 컴포넌트
+```
+class HelloMessage extends React.Component {
+    render() {
+        return (
+        <div>
+            Hello {this.props.name}
+        </div>
+        );
+    }   
+}
+ReactDOM.render(
+    <HelloMessage name="Taylor" />,
+    document.getElementById('hello-example')
+);
+``` 
+- React component에서 render()메소드를 사용하는 예제.
+- render( ) 메소드는 데이터를 입력받아 화면에 반환하는 역할을 한다.
+
+
+### 2. state가 포함된 component
+```
+class Timer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { seconds: 0 };
+  }
+
+  tick() {
+    this.setState(state => ({
+      seconds: state.seconds + 1
+    }));
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  render() {
+    return (
+      <div>
+        Seconds: {this.state.seconds}
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Timer />,
+  document.getElementById('timer-example')
+);
+```
+- 동적인 데이터는 this.state로 접근할 수 있다.
+- state가 변하면 render( )메소드가 다시 호출되어 화면이 갱신된다.
+- 초기의 state를 0으로 출력한다.
+- 이후 componentDidMount( )메소드로 1초에 한번씩 tick( )메소드를 호출한다.
+- super는 부모 클래스를 의미하는 것으로 부모클래스의 생성자를 사용하겠다는 선언
+임과 동시에 this를 사용하기 위한 것이다.
+- super를 호출하기 전에는 this를 사용할 수 없다.
+### 3. 애플리케이션-Todo List
+```
+class TodoApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { items: [], text: '' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>TODO</h3>
+        <TodoList items={this.state.items} />
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="new-todo">
+            What needs to be done?
+          </label>
+          <input
+            id="new-todo"
+            onChange={this.handleChange}
+            value={this.state.text}
+          />
+          <button>
+            Add #{this.state.items.length + 1}
+          </button>
+        </form>
+      </div>
+    );
+  }
+
+  handleChange(e) {
+    this.setState({ text: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.text.length === 0) {
+      return;
+    }
+    const newItem = {
+      text: this.state.text,
+      id: Date.now()
+    };
+    this.setState(state => ({
+      items: state.items.concat(newItem),
+      text: ''
+    }));
+  }
+}
+
+class TodoList extends React.Component {
+  render() {
+    return (
+      <ul>
+        {this.props.items.map(item => (
+          <li key={item.id}>{item.text}</li>
+        ))}
+      </ul>
+    );
+  }
+}
+
+ReactDOM.render(
+  <TodoApp />,
+  document.getElementById('todos-example')
+);
+```
+- TodoApp과 TodoList 두개의 컴포넌트로 구성
+- handleChange는 모든 키보드 입력마다 React의 state를 갱신해서 보여준다.
+- render( )메소드 에서 초기 렌더링을 실행한다.
+- onChange를 통해 input에 입력되는 값으로 state 상태 변경을 준비한다.
+- 입력된 값은 state의 "text: '' "에 임시로 저장된다.
+
+
+
+---
 ## [ 11월 10일 ]
 ## 리액트 시작하기
 ## 1. https://ko.reactjs.org/
