@@ -1,59 +1,51 @@
-import React, {Component} from "react"
-import axios from 'axios'
-import Movie from "../components/movie"
-import './Home.css'
+import Reat from 'react';
+import axios from 'axios';
+import Movie from '../components/movie';
+import './Home.css';
+import React from 'react';
 
+class Home extends React.Component {
+    state = {
+        isLoading: true,
+        movies: [],
+    }
 
-class Home extends Component {
     getMovies = async () => {
         const {
             data: {
-                data: {movies}
-            }
-        } = await axios.get('https://yts.mx/api/v2/list_movies.json?sort_by=rating')   
-       this.setState({movies,isLoading: false}) ;
-    } 
-
-    state = {
-       isLoading: true,
-       movies: []
-    };
-
-    constructor(props) {
-        super(props)
-        console.log('constructor');
+                data: { movies },
+            },
+        } = await axios.get('https://yts-proxy.now.sh/list_movies.json?sort_by=rating');
+        this.setState({ movies, isLoading: false });
     }
 
-
     componentDidMount() {
-       this.getMovies();
+        this.getMovies()
     }
 
     render() {
         const { isLoading, movies } = this.state;
         return (
-            <section className="container">
-                {isLoading ? (
+            <section className="container"> {
+                isLoading ? (
                     <div className="loader">
-                        <span className="loader__text">Loading...</span>
+                        <span className="loader-class">Loading...</span>
                     </div>
-                ): (
+                ) : (
                     <div className="movies">
-                    {movies.map(movie => (
-                    <Movie
-                    key = {movie.id}
-                    id = {movie.id}
-                    year = {movie.year}
-                    title = {movie.title}
-                    poster = {movie.medium_cover_image}
-                    summary = {movie.summary}
-                    genres = {movie.genres}
-                    />
-                    
-                   ))} 
+                        {movies.map(movie => (
+                            <Movie
+                                key={movie.id}
+                                // id={movie.id}
+                                year={movie.year}
+                                title={movie.title}
+                                summary={movie.summary}
+                                poster={movie.medium_cover_image}
+                                genres={movie.genres}
+                            />
+                        ))}
                     </div>
                 )}
-                                
             </section>
         )
     }
