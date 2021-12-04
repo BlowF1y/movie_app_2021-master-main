@@ -1,4 +1,80 @@
 # 김영민 201840113
+## [ 11월 30일 ]
+## 클래스에 로컬 스테이트 출력하기
+  
+  - render() 메서드 안에 있는 this.props.date를 this.state.date로 변경.
+    ```
+    class Clock extends React.Component {
+      render() {
+        return (
+          <div>
+            <h1>Hello, world!</h1>
+            <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+          </div>
+        );
+      }
+    }
+    ```
+  - 초기 this.state를 지정하는 class constructor를 추가.
+    ```
+    class Clock extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+      }
+
+      render() {
+        return (
+          <div>
+            <h1>Hello, world!</h1>
+            <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+          </div>
+        );
+      }
+    }
+    ```
+  - 요소에서 date prop을 삭제.
+    ```
+    ReactDOM.render(
+      <Clock />,
+      document.getElementById('root')
+    );
+    ```
+- 함수에서 클래스로 변환하기
+  ```
+    1. React.Component를 확장하는 동일한 이름의 ES6 class를 생성.
+    2. render()라고 불리는 빈 메서드를 추가.
+    3. 함수의 내용을 render() 메서드 안으로 옮김.
+    4. render() 내용 안에 있는 props를 this.props로 변경.
+    5. 남아있는 빈 함수 선언을 삭제.
+  ```
+- React에서 조건부 렌더링은 JavaScript에서의 조건 처리와 같이 동작.
+  ```
+  function UserGreeting(props) {
+    return <h1>Welcome back!</h1>;
+  }
+
+  function GuestGreeting(props) {
+    return <h1>Please sign up.</h1>;
+  }
+  ```
+- 로그인 상태에따라 컴포넌트중 하나를 보여주는 화면을 제작
+  ```
+  function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+      return <UserGreeting />;
+    }
+    return <GuestGreeting />;
+  }
+
+  ReactDOM.render(
+    // Try changing to isLoggedIn={true}:
+    <Greeting isLoggedIn={false} />,
+    document.getElementById('root')
+  );
+  ```
+
 ## [ 11월 16일 ]
 ## 1. https://ko.reactjs.org/
 ### 1. 간단한 컴포넌트
