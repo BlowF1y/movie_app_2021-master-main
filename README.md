@@ -1,4 +1,129 @@
 # 김영민 201840113
+## [ 12월 08일 ]
+## 조건부 연산자로 If-Else구문 인라인으로 표현하기
+- 엘리먼트를 조건부로 렌더링하는 다른 방법은 조건부 연산자인 condition ? true: false를 사용하는 것입니다.
+- 아래 예시처럼 조건이 너무 복잡하다면 컴포넌트를 분리하기 좋을 때 일 수도 있다
+```jsx
+render() {
+  const isLoggedIn = this.state.isLoggedIn;
+  return (
+    <div>
+      {isLoggedIn
+        ? <LogoutButton onClick={this.handleLogoutClick} />
+        : <LoginButton onClick={this.handleLoginClick} />
+      }
+    </div>
+  );
+}
+```
+## Key
+- Key는 React가 어떤 항목을 변경, 추가 또는 삭제할지 식별하는 것을 돕고 엘리먼트에 안정적인 고유성을 부여하기 위해 배열 내부의 엘리먼트에 지정해야 합니다.
+- 대부분의 경우 데이터의 ID를 key로 사용합니다
+- key에 인덱스를 사용하는 것은 권장하지 않습니다. 이로 인해 성능이 저하되거나 컴포넌트의 state와 관련된 문제가 발생할 수 있습니다.
+
+### Key로 컴포넌트 추출하기
+- ListItem 컴포넌트를 추출 한 경우 ListItem 안에 있는 li 엘리먼트가 아니라 배열의 ListItem 엘리먼트가 key를 가져야 합니다.
+
+### Key는 형제 사이에서만 고유한 값이어야 한다.
+- Key는 배열 안에서 형제 사이에서 고유해야 하고 전체 범위에서 고유할 필요는 없고 두 개의 다른 배열을 만들 때 동일한 key를 사용할 수 있습니다.
+
+### Hook의 특징
+  - 선택적 사용 기존의 코드를 다시 작성할 필요 없이 일부의 컴포넌트들 안에서 Hook을
+    사용할 수 있다. 그러니 당장 Hook이 없다면 Hook을 사용할 필요는 없다.
+  - 100%이전 버전과 호환성Hook은 호환성을 깨뜨리는 변화가없다.
+  - 현재 사용가능 Hook은 v16.8.0에서 사용가능.
+
+### Hook 개요 + State Hook
+  ```javascript
+        import React, { useState } from 'react';
+        function Example() {
+        // "count"라는 새 상태 변수를 선언합니다
+        const [count, setCount] = useState(0);
+        return (
+        <div>
+              <p>You clicked {count} times</p>
+              <button onClick={() => setCount(count + 1)}>
+              Click me
+              </button>
+        </div>
+        );
+        }
+  ```  
+### Hook 개요 + State Hook
+```javascript
+      import React, { useState } from 'react';
+      function Example() {
+      // "count"라는 새 상태 변수를 선언합니다
+      const [count, setCount] = useState(0);
+      return (
+      <div>
+            <p>You clicked {count} times</p>
+            <button onClick={() => setCount(count + 1)}>
+            Click me
+            </button>
+      </div>
+      );
+      }
+```
+### 다중 입력 제어하기
+* 여러 input 엘리먼트를 제어해야할 때, 각 엘리먼트에 name 어트리뷰트를 추가하고
+event.target.name 값을 통해 핸들러가 어떤 작업을 할 지 선택할 수 있게 해줍니다.
+```javascript
+      class Reservation extends React.Component {
+      constructor(props) {
+      super(props);
+      this.state = {
+            isGoing: true,
+            numberOfGuests: 2
+      };
+      this.handleInputChange = this.handleInputChange.bind(this);
+      }
+      handleInputChange(event) {
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
+      this.setState({
+            [name]: value
+      });
+      }
+      render() {
+      return (
+            <form>
+            <label>
+            Is going:
+            <input
+                  name="isGoing"
+                  type="checkbox"
+                  checked={this.state.isGoing}
+                  onChange={this.handleInputChange} />
+            </label>
+            <br />
+            <label>
+            Number of guests:
+            <input
+                  name="numberOfGuests"
+                  type="number"
+                  value={this.state.numberOfGuests}
+                  onChange={this.handleInputChange} />
+            </label>
+            </form>
+      );
+      }
+      }
+```
+---
+### select 태그
+- HTML에서 select는 드롭 다운 목록을 만듭니다. 예를 들어, 이 HTML은 과일 드롭 다운 목록을 만듭니다.
+```javascript
+     <textarea>
+            <select>
+                  <option value="grapefruit">Grapefruit</option>
+                  <option value="lime">Lime</option>
+                  <option selected value="coconut">Coconut</option>
+                  <option value="mango">Mango</option>
+            </select>
+      </textarea> 
+```
 ## [ 12월 01일 ]
 ## 클래스에 로컬 스테이트 출력하기
   
